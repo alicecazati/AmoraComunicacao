@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Amora Comunicação | Estratégia & ESG</title>
+
+  <!-- Google Fonts + Font Awesome -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #262C5A;
+      --secondary: #2F356B;
+      --accent: #C9CBE3;
+      --bg: #F5F6F8;
+      --text: #6B6F7A;
+      --text-strong: #1E223F;
+      --white: #ffffff;
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-strong);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      width: 100%;
+      height: 80px;
+      padding: 0 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .logo img {
+      height: 100px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* Menu desktop */
+    .menu-desktop {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .menu-desktop a {
+      text-decoration: none;
+      color: var(--primary);
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 6px;
+      transition: color 0.2s;
+    }
+
+    .menu-desktop a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 20px;
+      transition: width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .menu-desktop a:hover::after {
+      width: 100%;
+    }
+
+    /* Botão hambúrguer (mobile) */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--primary);
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    /* Menu mobile overlay */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 320px;
+      height: 100vh;
+      background: var(--white);
+      backdrop-filter: blur(18px);
+      box-shadow: -8px 0 30px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
+      transition: right 0.35s ease-in-out;
+      padding: 50px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    .mobile-nav a {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.2s;
+      display: block;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--secondary);
+      padding-left: 8px;
+      border-bottom-color: var(--accent);
+    }
+
+    /* Overlay escuro */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+      background: linear-gradient(135deg, var(--primary) 0%, #3A407A 100%);
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .btn {
+      margin-top: 32px;
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 40px;
+      background: var(--accent);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      background: #dfe1f5;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* sections */
+    section {
+      padding: 110px 10%;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .subtitle {
+      margin-bottom: 48px;
+      color: var(--text);
+      max-width: 620px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 36px;
+    }
+
+    .card {
+      background: white;
+      padding: 36px 28px;
+      border-radius: 24px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text-strong);
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* CLIENTES COM LOGOS (IMAGENS REAIS) */
+    .clientes-logos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .cliente-logo-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      border: 1px solid #edeef2;
+    }
+
+    .cliente-logo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .cliente-logo-card img {
+      max-width: 85%;
+      max-height: 80px;
+      width: auto;
+      object-fit: contain;
+      transition: 0.2s;
+      opacity: 0.92;
+    }
+
+    .cliente-logo-card:hover img {
+      opacity: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+    }
+
+    /* fallback caso imagem não carregue */
+    .cliente-logo-card span {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+
+    /* footer */
+    footer {
+      padding: 40px 20px 30px;
+      text-align: center;
+      background: var(--secondary);
+      color: white;
+    }
+
+    .social {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.25s;
+    }
+
+    .social a i {
+      font-size: 16px;
+    }
+
+    .social a:hover {
+      background: var(--accent);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    footer p {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* =========================
+   RESPONSIVIDADE MELHORADA
+========================= */
+
+    /* Tablets */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 0 32px;
+      }
+
+      .hero {
+        padding: 0 6%;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      section {
+        padding: 90px 6%;
+      }
+    }
+
+    /* Mobile geral */
+    @media (max-width: 900px) {
+      nav {
+        padding: 0 20px;
+        height: 70px;
+      }
+
+      .logo img {
+        height: 70px;
+      }
+
+      .menu-desktop {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      /* HERO */
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+        padding: 120px 24px 60px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+        line-height: 1.3;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 70px 20px;
+      }
+
+      h2 {
+        font-size: 30px;
+        text-align: center;
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* GRID */
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card {
+        padding: 24px;
+        border-radius: 18px;
+      }
+
+      /* CLIENTES */
+      .clientes-logos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .cliente-logo-card {
+        min-height: 110px;
+        padding: 16px;
+      }
+
+      .cliente-logo-card img {
+        max-height: 55px;
+      }
+
+      /* CONTATO */
+      #contato {
+        margin: 20px;
+        padding: 40px 20px;
+        border-radius: 24px;
+        text-align: center;
+      }
+    }
+
+    /* Mobile pequeno */
+    @media (max-width: 480px) {
+      .hero {
+        padding-top: 110px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 26px;
+      }
+
+      .clientes-logos {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cliente-logo-card {
+        min-height: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="Img\8427bd42-3100-48a3-ad34-6ea98e2d1e57.png" alt="Amora Comunicação">
+    </div>
+
+    <div class="menu-desktop">
+      <a href="#">Home</a>
+      <a href="#sobre">Quem somos</a>
+      <a href="#servicos">Soluções</a>
+      <a href="#portfolio">Portfólio</a>
+      <!--<a href="#depoimentos">Depoimentos</a>-->
+      <a href="#clientes">Clientes</a>
+      <!--<a href="#blog">Blog</a>-->
+      <a href="#contato">Contato</a>
+    </div>
+
+    <button class="mobile-menu-btn" id="menuToggleBtn" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#"> Home</a>
+    <a href="#sobre">Quem somos</a>
+    <a href="#servicos">Soluções</a>
+    <a href="#portfolio">Portfólio</a>
+    <!--<a href="#depoimentos">Depoimentos</a>-->
+    <a href="#clientes">Clientes</a>
+    <!--<a href="#blog">Blog</a>-->
+    <a href="#contato">Contato</a>
+    <a href="https://wa.me/553183994414" target="_blank"
+      style="border-bottom: none; background:#e9ebf5; border-radius: 40px; text-align: center; margin-top: 12px;"><i
+        class="fab fa-whatsapp"></i> WhatsApp</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Ajudamos a construir a sua história. </h1>
+      <p>Cuidamos da reputação de empresas e organizações com histórias marcantes, gerando valor para negócios, pessoas
+        e sociedade.</p>
+      <a href="https://wa.me/553183994414?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista."
+        class="btn" target="_blank">
+        <i class="fab fa-whatsapp"></i> Entrar em contato
+      </a>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <h2>Quem somos</h2>
+    <p class="subtitle">
+      Com atuação em setores-chave da economia e experiência em contextos complexos, a Amora estrutura e executa
+      estratégias de comunicação corporativa orientadas à reputação, gestão de risco e geração de valor. O trabalho
+      parte da leitura de cenário e dos objetivos das organizações para construir narrativas consistentes, alinhadas aos
+      diferentes stakeholders e sustentadas ao longo do tempo.
+      A abordagem integra comunicação institucional, relações públicas, comunicação interna e posicionamento de marca,
+      conectando canais, mensagens e decisões estratégicas. Mais do que visibilidade, o foco está em credibilidade,
+      influência e legitimidade.
+    </p>
+    <h2>Idealizadora</h2>
+    <p class="subtitle">A idealizadora da Amora é Marcela Haddad, jornalista que atuo há 18 anos em Comunicação
+      Corporativa,
+      com foco em gestão de riscos reputacionais, estratégias
+      organizacionais, comunicação interna e externa e relações
+      públicas em empresas de grande porte e agências. Ao longo da
+      sua trajetória, liderou frentes de PR, comunicação digital e
+      institucional, garantindo alinhamento estratégico entre canais,
+      mensagens e objetivos de negócio.
+      Já passou por setores-chave da economia, como Siderurgia e Mineração, Mobilidade e
+      Infraestrutura, Transporte de Carga e Logística e Agronegócio, gerando valor para marcas e
+      resultado para os negócios. Ressalto, ainda, experiência em Auto, Saúde, Turismo e Aviação e
+      Construção Civil.
+      Durante três anos, dedicou a uma organização que financia projetos da Sociobioeconomia
+      e Pecuária Sustentável na Amazônia. Atuou na gestão de relacionamento com stakeholders,
+      comunicação interna e externa, redes sociais e produção de eventos.
+    </p>
+
+    <h2>Tragetória profissional e formação</h2>
+
+    <p class="subtitle">Passou por organizações como Royal Air Maroc, Iveco Group, Gerdau, Fundação Renova e Fundo JBS
+      pela Amazônia, além
+      de consultorias como Inpress Porter Novelli, Rede Comunicação e Interface Comunicação, atendendo grandes contas
+      industriais e institucionais. Sua experiência inclui gestão de reputação, comunicação em cenários de crise,
+      relações públicas, comunicação institucional e projetos ligados a ESG e sustentabilidade.
+      Atua na liderança e execução de estratégias 360°, integrando comunicação interna e externa, relacionamento com
+      stakeholders, produção de conteúdo e posicionamento institucional, com forte interface com alta liderança e
+      ambientes regulatórios complexos.
+      Possui especialização em Marketing Estratégico pela PUC Minas, formação em ESG pela Esalq/USP e cursa
+      pós-graduação em Comunicação Organizacional pela ECA/USP, com base acadêmica sólida que sustenta a atuação em
+      reputação, sustentabilidade e comunicação estratégica.
+    </p>
+    <h2>Valores</h2>
+    <div class="grid">
+
+      <div class="card"><strong>1.Orientação a negócio</strong>
+        <br></br>
+        Comunicação a serviço de resultados, competitividade e geração de valor.
+      </div>
+      <div class="card"><strong>2.Reputação e credibilidade</strong>
+        <br></br>
+        Gestão da imagem, com foco em confiança e
+        relacionamento com stakeholders.
+      </div>
+      <div class="card"><strong>3.Visão integrada (360°)</strong>
+        <br></br>
+        Atuação estratégica e conexão com as frentes da
+        comunicação corporativa
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <h2>Soluções</h2>
+    <div class="grid">
+      <div class="card"><strong>1.Comunicação Estratégica e Posicionamento</strong>
+        <br></br>
+        Estruturação de narrativas institucionais alinhadas aos objetivos de negócio, com definição de mensagens-chave,
+        posicionamento e arquitetura de comunicação.
+      </div>
+      <div class="card"><strong>2.Gestão de Reputação e Riscos</strong>
+        <br></br>
+        Mapeamento de riscos reputacionais,
+        desenvolvimento de planos preventivos e atuação em cenários sensíveis e de crise.
+      </div>
+      <div class="card"><strong>3.Relações Públicas e Imprensa (PR)</strong>
+        <br></br>
+        Planejamento e execução de estratégias
+        de relacionamento com a imprensa, produção de conteúdo, gestão de pautas, media training e acompanhamento de
+        exposição.
+      </div>
+      <div class="card"><strong>4.Comunicação Institucional e ESG</strong>
+        <br></br>
+        Desenvolvimento de narrativas e
+        posicionamentos ligados a sustentabilidade, impacto e agendas regulatórias, com foco em credibilidade e
+        consistência.
+      </div>
+      <div class="card"><strong>5.Comunicação Integrada e Conteúdo</strong>
+        <br></br>
+        Planejamento e execução de comunicação
+        interna e externa, produção de conteúdo estratégico, employer branding e gestão de canais com visão 360°.
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFÓLIO -->
+  <section id="portfolio">
+    <h2>Portfólio</h2>
+    <div class="grid">
+      <div class="card"><strong>Royal Air Maroc | PR e Comunicação Externa (Brasil)</strong>
+        <br></br>
+        Responsável pelo
+        posicionamento institucional da companhia no Brasil, com foco no fortalecimento de reputação e presença no
+        mercado.
+        Estruturou estratégias de relações públicas, relacionamento com imprensa e influenciadores, além de iniciativas
+        como press trips e campanhas conectadas aos objetivos comerciais.
+
+      </div>
+      <div class="card"><strong>Fundo JBS pela Amazônia | Coordenação de Comunicação
+        </strong>
+        <br></br>
+        Liderou a comunicação 360° do fundo, com foco em reputação, engajamento de stakeholders e
+        visibilidade das iniciativas de impacto.
+        Atuou na interface com parceiros, imprensa e projetos financiados, além da construção de narrativas ligadas à
+        sociobioeconomia e à agenda climática.
+      </div>
+      <div class="card"><strong>Oncomed / Hospital Orizonti | Comunicação e Gestão de Crise
+        </strong>
+        <br></br>
+        Conduziu a gestão de crise e o relacionamento com imprensa e stakeholders institucionais em um
+        contexto sensível.
+        Desenvolveu posicionamentos estratégicos e articulou a comunicação com comunidade e atores públicos, garantindo
+        consistência e controle de narrativa.
+
+      </div>
+      <div class="card"><strong>CIBAPAR (Comitê da Bacia Hidrográfica do Rio Paraopeba) | Comunicação
+          Institucional</strong>
+        <br></br>
+        Atuou na comunicação institucional do CIBAPAR, órgão colegiado responsável pela gestão dos recursos
+        hídricos na bacia do Rio Paraopeba (MG).
+        Contribuiu para a organização de narrativas e relacionamento com stakeholders em um contexto sensível,
+        envolvendo agenda ambiental, regulação e uso sustentável da água
+
+
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS
+  <section id="depoimentos">
+    <h2>Depoimentos</h2>
+    <div class="grid">
+      <div class="card">“A Amora potencializou nossa reputação com uma estratégia de comunicação afiada e resultados
+        expressivos.”</div>
+      <div class="card">“Parceiros estratégicos, entregam posicionamento sólido e conexão genuína com a imprensa de
+        negócios.”</div>
+    </div>
+  </section>
+ -->
+  <!-- CLIENTES COM LOGOS (SUBSTITUINDO TEXTOS POR IMAGENS) -->
+  <section id="clientes">
+    <h2>Clientes</h2>
+
+    <div class="clientes-logos">
+      <!-- Logo Iveco -->
+      <div class="cliente-logo-card">
+        <img src="Img\start-image.png" onerror="this.onerror=null; this.parentElement.innerHTML='<span>IVECO</span>';">
+      </div>
+      <!-- Logo royal -->
+      <div class="cliente-logo-card">
+        <img src="Img\Logo_Royal_Air_Maroc.svg.png"
+          onerror="this.onerror=null; this.parentElement.innerHTML='<span>NATURA</span>';">
+      </div>
+      <!-- Logo JBS -->
+      <div class="cliente-logo-card">
+        <img src="Img\JBS-Fundo-pela-Amazonia.png" alt="Bayer"
+          onerror="this.onerror=null; this.parentElement.innerHTML='<span>BAYER</span>';">
+      </div>
+      <!-- Logo Gerdau -->
+      <div class="cliente-logo-card">
+        <img src="Img/oie_csUNKJZHgroN.png" alt="Bayer"
+          onerror="this.onerror=null; this.parentElement.innerHTML='<span>BAYER</span>';">
+      </div>
+      <!-- Logo Fundação Renova -->
+      <div class="cliente-logo-card">
+        <img src="" alt=""
+          onerror="this.onerror=null; this.parentElement.innerHTML='<span>CIBAPAR (Comitê da Bacia Hidrográfica do Rio Paraopeba) </span>';">
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG 
+  <section id="blog">
+    <h2>Blog</h2>
+    <div class="grid">
+      <div class="card"><strong>ESG e reputação corporativa</strong><br>Como construir credibilidade através da
+        comunicação sustentável.</div>
+      <div class="card"><strong>Estratégias para liderança de pensamento</strong><br>Cases e boas práticas para
+        influenciar positivamente.</div>
+    </div>
+  </section>
+-->
+  <!-- CONTATO -->
+  <section id="contato" style="background: #eef0f5; border-radius: 32px; margin: 20px 10% 40px; padding: 60px 40px;">
+    <h2 style="color: var(--primary);">Vamos conversar?</h2>
+    <p class="subtitle" style="margin-bottom: 30px;">Soluções personalizadas de comunicação para marcas que desejam
+      evoluir com propósito.</p>
+    <a href="https://wa.me/553183994414?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista."
+      class="btn" target="_blank" style="background: #25D366; color: white;">
+      <i class="fab fa-whatsapp"></i> Falar com especialista
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social">
+      <a href="https://wa.me/553183994414?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista."
+        target="_blank" class="whatsapp-link">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://br.linkedin.com/in/marcela-c-haddad" target="_blank"><i class="fab fa-linkedin-in"></i>
+        LinkedIn</a>
+      <a href="https://www.instagram.com/amora.comunicacao" target="_blank"><i class="fab fa-instagram"></i>
+        Instagram</a>
+      <a href="mailto:comunicacao@amorapr.com"><i class="far fa-envelope"></i> Email</a>
+    </div>
+    <p>© Amora Comunicação — Estratégia, ESG e reputação</p>
+  </footer>
+
+  <!-- SCRIPT MENU HAMBURGUER -->
+  <script>
+    (function () {
+      const menuBtn = document.getElementById('menuToggleBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      const overlay = document.getElementById('navOverlay');
+
+      function closeMenu() {
+        mobileNav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function openMenu() {
+        mobileNav.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function toggleMenu() {
+        if (mobileNav.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+
+      if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', closeMenu);
+
+      const mobileLinks = mobileNav.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              closeMenu();
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (href === '#') {
+              closeMenu();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              closeMenu();
+            }
+          } else {
+            closeMenu();
+          }
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 900 && mobileNav.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
+
+  <style>
+    .cliente-logo-card img {
+      transition: all 0.2s;
+    }
+
+    #contato,
+    section {
+      scroll-margin-top: 85px;
+    }
+  </style>
+
+</body>
+
+</html>
